@@ -1,21 +1,13 @@
 #!/usr/bin/env python3
-"""
-The coroutine will loop 10 times, each time asynchronously waiting for 1 second.
-"""
+"""Creates a generator"""
 import asyncio
 import random
+from typing import Generator
 
-async def async_generator():
-    for _ in range(10):
+
+async def async_generator() -> Generator[float, None, None]:
+    """Each time asynchronously waits 1 second,
+        then yield a random number between 0 and 10"""
+    for _ in range(0, 10):
         await asyncio.sleep(1)
-        yield random.randint(0, 10)
-
-# Example usage:
-async def main():
-    async for number in async_generator():
-        print(f"Generated random number: {number}")
-
-# Run the event loop to test the coroutine
-if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(main())
+        yield random.uniform(0, 10)
